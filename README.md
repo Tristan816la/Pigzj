@@ -195,8 +195,7 @@ According to the comment in pigz.c:
     "When doing parallel compression, pigz uses the main thread 
     to read the input in 'size' sized chunks (see -b), and puts those in a 
     compression job list, each with a sequence number 
-    to keep track of the ordering. 
-
+    to keep track of the ordering."
     If it is not the first chunk, then that job also points to 
     the previous input buffer, from which the last 32K will be used 
     as a dictionary (unless -i is specified).
@@ -209,23 +208,19 @@ a. Divide input into sized chunk:
     I create a constant CHUNK_SIZE = 131072 which specifies the sized chunk 
     to be 128 KiB. Then,I read input from System.in 
     into a buffer with CHUNK_SIZE. 
-    
     However, instead of creating a compression job list, I created a java class 
     ``MyThread`` which has a ``chunk`` field storing 
     its corresponding job, and then I store all ``MyThread`` 
     into an array ``myThreads`` in order
     to conveniently start and join threads. 
-    
     Instead, my implementation first dispatches all threads to 
     corresponding comprssion tasks. Then, it waits for the first thread 
     to join, dispatch first thread again, and waits for the second
     thread to join (so on so forth).
-
     e.g. If there are 10 chunks and 3 threads a,b,c, first, a,b,c are 
     all dispatched to compress chunks. Then, my program would wait for a 
     to finish, output a's result, dispatch a to compress the 4th chunk, 
     and then wait for b to finish to let it compress 5th chunk etc.
-
     Notice, there is another case. When stdin is small, some threads 
     might not be used. For instance, if we have 2 chunks and 3 threads, 
     only a, b would be used and c might not be used. In this case,
@@ -239,7 +234,6 @@ b. Write Output
     of the compress() in the hint code to return an outStream instead of void. 
     Then, I store the outStream into a field called ``output`` 
     in ``MyThread``.
-    
     After I joined any thread i, I would call 
     ``myThreads[i].output.writeTo(System.out)`` 
     to write the result to the stdout.
@@ -276,11 +270,9 @@ e. Others
     without modification before start() and join(). This guarantees that each
     thread is given atomic data for compression so there cannot be a data race
     because there is no shared global structures.
-
     Then, when collecting the result, I joined the thread first then output
     the result, so the output is in fact handled by the single main thread
     and no potential data race could be introduced.
-
     Contrast to approach where a global data structure is shared by all 
     threads, this approach introduces less overhead by not introducing 
     synchonized actions or any locks.
@@ -292,7 +284,6 @@ e. Others
     tackle the "crc mismatch" problem. And the ``SingleCompressor`` is given 
     chunk to compress and prev_chunk to use as dictionary so that 
     a while loop is no longer needed.
-
     By not using a while loop in SingleCompressor and assign a compressor
     to each thread, we not only ensured the compress() action is integrate
     but also speeding up the process since 
