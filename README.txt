@@ -1,11 +1,11 @@
-Content:
+### Content:
 1. Performance
 2. Strace Analysis
 3. My Observation & Problem Analysis 
 4. Implementation to achieve better parallelization
 (Not specified in spec, but beneficial for understanding my program)
 
-1. Performance:
+### 1. Performance:
 (The order is gzip, pigz, Pigzj)
 
 (1) Default
@@ -81,7 +81,7 @@ My implementation results in a larger compressed file.
 However, it is not noticeable since all three implementation 
 varie less than 1%.
 
-2. Strace Analysis:
+### 2. Strace Analysis:
 The usage of multithreading makes pigz and Pigzj runs faster. 
 However, Pigzj needs to use jdk and check a few programs 
 which result in a longer time of execution.
@@ -141,7 +141,7 @@ and ensure data integrity. These are system calls that gzip
 doesn't use and make pigz and Pigzj run faster 
 when dealing with large files.
 
-3. Observation & Problem Analysis
+### 3. Observation & Problem Analysis
 (1) Observation: 
 a. scalability issue
 When threads scale up, there might be cases where many threads are not
