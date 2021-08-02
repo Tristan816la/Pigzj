@@ -9,6 +9,7 @@
 (The order is gzip, pigz, Pigzj)
 
 (1) Default
+```
 real	0m7.921s
 user	0m7.469s
 sys	0m0.055s
@@ -23,8 +24,10 @@ sys	0m0.227s
 -rw-r--r-- 1 classque class 43261332 May  4 10:52 gzip.gz
 -rw-r--r-- 1 classque class 43134815 May  4 10:52 pigz.gz
 -rw-r--r-- 1 classque class 44047588 May  4 10:52 Pigzj.gz
+```
 
 (2) Two threads
+```
 real	0m7.937s
 user	0m7.459s
 sys	0m0.068s
@@ -39,8 +42,10 @@ sys	0m0.211s
 -rw-r--r-- 1 classque class 43261332 May  4 10:58 gzip.gz
 -rw-r--r-- 1 classque class 43134815 May  4 10:58 pigz.gz
 -rw-r--r-- 1 classque class 44047588 May  4 10:59 Pigzj.gz
+```
 
 (3) One thread
+```
 real	0m7.751s
 user	0m7.508s
 sys	0m0.050s
@@ -55,8 +60,10 @@ sys	0m0.315s
 -rw-r--r-- 1 classque class 43261332 May  4 11:00 gzip.gz
 -rw-r--r-- 1 classque class 43134815 May  4 11:00 pigz.gz
 -rw-r--r-- 1 classque class 44047588 May  4 11:00 Pigzj.gz
+```
 
 (4) Three threads
+```
 real	0m7.947s
 user	0m7.459s
 sys	0m0.057s
@@ -71,7 +78,7 @@ sys	0m0.281s
 -rw-r--r-- 1 classque class 43261332 May  4 11:02 gzip.gz
 -rw-r--r-- 1 classque class 43134815 May  4 11:02 pigz.gz
 -rw-r--r-- 1 classque class 44047588 May  4 11:02 Pigzj.gz
-
+```
 (5) Compression Ratios (compressed / original)
 gzip: 0.34349
 pigz: 0.34249
